@@ -22,7 +22,8 @@ public class Vendedor implements Comparable<Vendedor>{
 	public int compareTo(Vendedor v) {
 		int aux = this.getApellido().compareTo(v.getApellido());
 		if (aux == 0) {
-			aux =  Integer.compare(this.getEdad(), v.getEdad());
+			//aux =  Integer.compare(this.getEdad(), v.getEdad()); Funciona, pero se prefiere con -
+			aux =  this.getEdad() - v.getEdad();
 		}
 		return aux;
 	}
@@ -77,7 +78,7 @@ public class Vendedor implements Comparable<Vendedor>{
 	public double getGananciaTotal() {
 		double ganancia = 0;
 		for(Venta venta : this.ventas) {
-			ganancia += venta.getCantidad();
+			ganancia += venta.getGanancia();
 		}
 		return ganancia;
 	}
