@@ -6,17 +6,8 @@ import java.util.Collections;
 import java.util.List;
 
 import Comparadores.Comparador;
-import Comparadores.ComparadorCompuesto;
-import Comparadores.ComparadorPorApellido;
-import Comparadores.ComparadorPorEdad;
 import Criterios.Criterio;
-import Criterios.CriterioAND;
-import Criterios.CriterioNOT;
-import Criterios.CriterioOR;
 import Criterios.CriterioPorCantVentasPorPeriodo;
-import Criterios.CriterioPorCodigoProducto;
-import Criterios.CriterioPorEnPeriodo;
-import Criterios.CriterioPorGananciaMayor;
 
 public class Empresa {
 
@@ -25,11 +16,10 @@ public class Empresa {
 
 	private Comparador metodoRankeador;
 	
-	public Empresa(String nombre) {
+	public Empresa(String nombre, Comparador rankeador) {
 		this.nombre = nombre;
 		this.vendedores = new ArrayList<Vendedor>();
-		//Por defecto el metodo para rankear a los vendedores es por nombre. 
-		this.metodoRankeador = new ComparadorPorApellido();
+		this.metodoRankeador = rankeador;
 	}
 	
 	public List<Vendedor> Rankear(){
@@ -61,18 +51,21 @@ public class Empresa {
 				resultado.add(vendedor);
 			}
 		}
-		Comparador c1 = new ComparadorPorApellido();
-		Comparador c2 = new ComparadorPorEdad();
-		Comparador compuesto = new ComparadorCompuesto(c1, c2);
-		Collections.sort(resultado, compuesto);
+		Collections.sort(resultado);
 		return resultado;
 	}
+	
+	/*
+	
+	Estos métodos irían en un main. Dejo uno descomentado para que no hay warning
+	
+	*/
 	
 	//● que vendieron más de 200 productos en un período dado
 	public List<Vendedor> getVendedoresPorCantVentasEnPeriodo(int cantVentas, LocalDate desde, LocalDate hasta){
 		return this.buscar(new CriterioPorCantVentasPorPeriodo(cantVentas,desde,hasta));
 	}
-	
+	/*
 	//● que generaron a la empresa ganancias por más de $150.200
 	public List<Vendedor> getVendedoresPorGananciaMayor(double ganancia){
 		return this.buscar(new CriterioPorGananciaMayor(ganancia));
@@ -105,6 +98,8 @@ public class Empresa {
 		return this.buscar(new CriterioNOT(c));
 	}
 	
+	*/
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -112,7 +107,5 @@ public class Empresa {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	
 	
 }

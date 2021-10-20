@@ -6,17 +6,12 @@ import Principal.Vendedor;
 
 public class ComparadorPorVendedorJoven extends Comparador{
 
-	private LocalDate desde;
-	private LocalDate hasta;
-	
 	public ComparadorPorVendedorJoven(LocalDate desde, LocalDate hasta) {
-		super();
-		this.desde = desde;
-		this.hasta = hasta;
+		super(desde,hasta);
 	}
 		
 	public int compare(Vendedor vendedor1, Vendedor vendedor2) {
-		return Double.compare(vendedor1.getPonderacion(desde, hasta), vendedor2.getPonderacion(desde, hasta));
+		return Double.compare(vendedor1.getPonderacion(super.getDesde(), super.getHasta()), vendedor2.getPonderacion(super.getDesde(), super.getHasta()));
 	}
 	
 

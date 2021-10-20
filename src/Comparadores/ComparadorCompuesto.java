@@ -1,8 +1,10 @@
 package Comparadores;
 
+import java.util.Comparator;
+
 import Principal.Vendedor;
 
-public class ComparadorCompuesto extends Comparador{
+public class ComparadorCompuesto implements Comparator<Vendedor>{
 
 	private Comparador c1;
 	private Comparador c2;

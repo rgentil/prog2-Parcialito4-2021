@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Vendedor {
+public class Vendedor implements Comparable<Vendedor>{
 
 	private String nombre;
 	private String apellido;
@@ -17,6 +17,14 @@ public class Vendedor {
 		this.apellido = apellido;
 		this.edad = edad;
 		this.ventas = new ArrayList<Venta>();
+	}
+	
+	public int compareTo(Vendedor v) {
+		int aux = this.getApellido().compareTo(v.getApellido());
+		if (aux == 0) {
+			aux =  Integer.compare(this.getEdad(), v.getEdad());
+		}
+		return aux;
 	}
 	
 	public String toString() {
@@ -136,7 +144,6 @@ public class Vendedor {
 	public void setEdad(int edad) {
 		this.edad = edad;
 	}
-
 	
 	
 }
